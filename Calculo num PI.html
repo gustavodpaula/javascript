@@ -1,0 +1,101 @@
+# JavaScript
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Calcular o numero PI</title>
+    <meta charset="utf-8">
+  </head>
+  
+  <body>
+   
+   <form>
+   
+	<h1> Calculo do numero PI </h1> <br \>    
+	Utilizando a soma infinita de Sir Isaac NEWTON abaixo <br \>
+	<img src="NEWTON.png" /> <br \>
+	fonte: http://www.geom.uiuc.edu/~huberty/math5337/groupe/expresspi.html <br /> <br />
+	
+	</form>
+	
+	Numero de casas decimais  <input id="Precisao" type="number" value="3"/>
+	<input type="button" value="Iniciar" onClick="Inicio()" /> <br \>
+	OBS: Max de 15 casas decimais
+	<p id="saida"></p> <br /> <br />
+	Desenvolvido por: 'Gustavo Silva de Paula' <br \>
+ 
+  <script type="text/javascript">							//Inicia o script
+  
+ /*
+	Este código foi criado por Gustavo Silva de Paula.
+	facebook.com/g.silva7337
+	GitHub - https://github.com/Gustavo7337
+	Consiste em calcular o número PI, a partir de uma série finitada onde é possivel chegar em uma aproximação,
+	
+	Foi desenvolvida por Sir Isaac NEWTON
+	
+					
+	fonte: http://www.geom.uiuc.edu/~huberty/math5337/groupe/expresspi.html
+	
+*/
+ 
+ <!--  //Para impedir que navegadores antigos leiam o script
+	
+	function Inicio() 										//função que é 'chamada' quando se clica no botão
+	{
+		if(parseInt(document.getElementById("Precisao").value, 10) >15)	//Verifica se as casas decimais são maior que 15
+		{
+			alert("Você optou por mais de 15 casas decimais, favor rever.");
+			return;
+		}
+		if(parseInt(document.getElementById("Precisao").value, 10) <0)	//Verifica se as casas decimais são menor que 0
+		{
+			alert("Você optou por casas decimais negativas. Brincadeira né?");
+			return;
+		}
+		
+		var pi=0;													//Declaração de PI sendo 0.5, pois o arcsin(1/2)=pi/6
+		var x=0.5;
+		var conver = "";											//Declarações de Variaveis
+		var resultado = "";
+		var num =1;													//Variavel numerador
+		var den = 2;												//Variavel denominador
+		var a =3;													//constante para a equação
+		var b = 1;													//constante para a equação
+		var casas=0;												//num de casas decimais escolhido
+		
+		for(i=1;i<=22;i++)											//Loop para realizar a equação de NEWTON por 22 vezes, porem limitado a apenas 15 casas decimais :(
+		{
+			if (i==1)													//No inicio da eq. é necessario usar a cte 1/2, somente da 1ª vez que se usa
+			{
+				pi = pi + x + (num/den * Math.pow(x,a)/a) * b ;			//Eq. de Sir NEWTON resumida por constantes. OBS: Eu que criei hahaha
+				b= num/den *b											//A eq segue uma logica onde o num. e o den. se repetem e são multiplicados entre si a cada volta, veja a eq...
+				num +=2;													//Na eq. o num é sempre impar
+				den +=2;													//Na eq. o den é sempre par
+				a +=2;													// Seria a cte que vai no expoente e no denominador
+			}
+			else 
+			{
+				pi = pi + (num/den * Math.pow(x,a)/a) * b ;				//Eq. de Sir NEWTON resumida por constantes. OBS: Eu que criei hahaha
+				b= num/den *b											//A eq segue uma logica onde o num. e o den. se repetem e são multiplicados entre si a cada volta, veja a eq...
+				num+=2;													//Na eq. o num é sempre impar
+				den+=2;													//Na eq. o den é sempre par
+				a+=2;													// Seria a cte que vai no expoente e no denominador
+			}
+		}
+		pi=6*pi;														//Iguala 'pi' a 6 vezes o mesmo, ou seja conclui a equação de NEWTON
+		conver= pi.toString();											//Convert pi para uma string (conjunto de caracteres)
+		casas= parseInt(document.getElementById("Precisao").value, 10); //Converte a "entrada do valor de casas" para a base 10 (decimal)
+		resultado = conver.substring(0,(casas+2));						//Obtem o numero de casas decimais do número PI, conforme escolhido
+		saida = "PI= " + resultado + "<br />" + "<br />" + "Comparando ao valor de PI dado pela biblioteca: Math.PI = " + Math.PI;	 //Mostra o resultado na tela
+		saida= saida.bold();											//Coloca em negrito
+		document.getElementById("saida").innerHTML = saida;				//É necessario devido o resultado na tela ser um objeto 'externo' do script	
+	}			
+	//--> //Para impedir que navegadores antigos leiam o script
+	
+//Encerra o script. No comando abaixo, impossivel comentar ao lado :(
+  </script>											
+    
+  </body>
+  
+</html>
